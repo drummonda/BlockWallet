@@ -5,8 +5,9 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 
 import blockchain from './blockchain';
 import message from './message';
+import networks from './network';
 
-const reducer = combineReducers({blockchain, message})
+const reducer = combineReducers({blockchain, message, networks})
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
@@ -15,3 +16,4 @@ const store = createStore(reducer, middleware)
 export default store
 export * from './blockchain'
 export * from './message'
+export * from './network'

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 // import { default as initSocket } from '../socket';
-import { setBlockchain } from '../store'
+import { setBlockchain, setServer, setSocket } from '../store'
 import './ConnectForm.css'
 
 class ConnectForm extends Component {
@@ -23,16 +23,18 @@ class ConnectForm extends Component {
     socket.onmessage = (msg) => {
       const message = JSON.parse(msg.data);
       const data = JSON.parse(message.data);
-      console.log('received a message', data);
-      this.props.setBlockchain(data)
+      this.props.setBlockchain(data);
     };
   }
 
   async handleClick(evt) {
     evt.preventDefault();
     const { network } = this.state;
+    const socket = `ws://${network}`;
     this.setState({ network: '' });
-    this.initSocket(`ws://${network}`);
+    this.props.setSocket(socket);
+    this.initSocket(socket);
+    this.props.hide();
   }
 
   handleChange(evt) {
@@ -72,6 +74,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   setBlockchain: data => dispatch(setBlockchain(data)),
+  setServer: server => dispatch(setServer(server)),
+  setSocket: socket => dispatch(setSocket(socket))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ConnectForm)
