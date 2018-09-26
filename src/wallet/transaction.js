@@ -45,6 +45,9 @@ export function getTransactionId(transaction) {
   return CryptoJS.SHA256(txInContent + txOutContent).toString();
 }
 
+export function findUnspentTxOut(transactionId, index, aUnspentTxOuts) {
+  return aUnspentTxOuts.find(uTxO => uTxO.txOutId === transactionId && uTxO.txOutIndex === index);
+}
 
 export function signTxIn(transaction, txInIndex, txInNumber, privateKey, aUnspentTxOuts) {
   const txIn = transaction.txIns[txInIndex];

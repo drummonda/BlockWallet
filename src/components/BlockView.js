@@ -10,13 +10,18 @@ class Chain extends Component {
     const { blockchain } = this.props;
 
     return (
-      <div className="ui cards" id='blockchain'>
-
-        <Card.Group>
-          { blockchain.map(block => (
-            <Block key={block.index} block={block} />
-          ))}
-        </Card.Group>
+      <div id='blockchain'>
+        <h3>Block Explorer: </h3>
+        {blockchain.length ?
+          <Card.Group>
+            {blockchain.map(block => (
+              <Block key={block.index} block={block} />
+            ))}
+          </Card.Group>
+        :
+          <p>
+            No blockchain found, try connecting to a network
+          </p>}
       </div>
     )
   }

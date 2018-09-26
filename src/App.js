@@ -1,10 +1,17 @@
 import React, { Component } from 'react'
+import { initWallet } from './wallet/index'
 import logo from './cube-vector.png'
 import ConnectForm from './components/ConnectForm'
 import BlockView from './components/BlockView'
 import './App.css';
+const privateKeyLocation = 'wallet/private_key.txt';
 
 class App extends Component {
+
+  componentDidMount() {
+    initWallet(privateKeyLocation);
+  }
+
   render() {
     return (
       <div className="App">

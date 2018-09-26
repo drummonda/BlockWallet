@@ -1,13 +1,15 @@
 import { ec } from 'elliptic'
-import { existsSync, readFileSync, writeFileSync } from 'fs'
 import { _ } from 'lodash'
 import { getPublicKey, getTransactionId, signTxIn, Transaction, TxIn, TxOut } from './transaction'
 
-const EC = new ec('secp256k1');
-const privateKeyLocation = '../../wallet/private_key.txt';
+const electron = window.require('electron');
+const fs = electron.remote.require('fs');
+const { existsSync, readFileSync, writeFileSync } = fs
 
-export function getPrivateFromWallet() {
-  const buffer = readFileSync(privateKeyLocation, 'utf8');
+const EC = new ec('secp256k1');
+
+export function getPrivateFromWallet(location) {
+  const buffer = readFileSync(location, 'utf8');
   return buffer.toString();
 }
 
@@ -23,12 +25,12 @@ export function generatePrivateKey() {
   return privateKey.toString(16);
 }
 
-export function initWallet() {
-  if(existsSync(privateKeyLocation)) {
+export function initWallet(location) {
+  if(existsSync(location)) {
     return;
   }
   const newPrivateKey = generatePrivateKey();
-  writeFileSync(privateKeyLocation, newPrivateKey);
+  writeFileSync(location, newPrivateKey);
   console.log('new wallet with private key created');
 }
 
