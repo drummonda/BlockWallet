@@ -5,7 +5,6 @@ import ConnectSocketForm from './components/ConnectSocketForm'
 import ConnectServerForm from './components/ConnectServerForm'
 import BlockView from './components/BlockView'
 import './App.css';
-const privateKeyLocation = 'wallet/private_key.txt';
 
 class App extends Component {
   constructor() {

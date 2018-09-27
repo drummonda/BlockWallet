@@ -2,14 +2,15 @@ import { ec } from 'elliptic'
 import { _ } from 'lodash'
 import { getPublicKey, getTransactionId, signTxIn, Transaction, TxIn, TxOut } from './transaction'
 
+const privateKeyLocation = 'wallet/private_key.txt';
 const electron = window.require('electron');
 const fs = electron.remote.require('fs');
 const { existsSync, readFileSync, writeFileSync } = fs
 
 const EC = new ec('secp256k1');
 
-export function getPrivateFromWallet(location) {
-  const buffer = readFileSync(location, 'utf8');
+export function getPrivateFromWallet() {
+  const buffer = readFileSync(privateKeyLocation, 'utf8');
   return buffer.toString();
 }
 

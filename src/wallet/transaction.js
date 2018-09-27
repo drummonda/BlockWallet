@@ -49,21 +49,9 @@ export function findUnspentTxOut(transactionId, index, aUnspentTxOuts) {
   return aUnspentTxOuts.find(uTxO => uTxO.txOutId === transactionId && uTxO.txOutIndex === index);
 }
 
-export function signTxIn(transaction, txInIndex, txInNumber, privateKey, aUnspentTxOuts) {
+export function signTxIn(transaction, txInIndex, privateKey) {
   const txIn = transaction.txIns[txInIndex];
   const dataToSign = transaction.id;
-  const referencedUnspentTxOut = findUnspentTxOut(txIn.txOutId, txIn.txOutIndex, aUnspentTxOuts);
-  if(referencedUnspentTxOut === null) {
-    console.log('could not find referenced unspent transaction output');
-    throw Error('No transaction output found');
-  }
-  const referencedAddress = referencedUnspentTxOut.address;
-
-  if(getPublicKey(privateKey) !== referencedAddress) {
-    console.log('trying to sign an input with private key that does not match'
-                + 'the address that is referenced in the txIn');
-    throw Error('private key does not match referenced address');
-  }
   const key = ec.keyFromPrivate(privateKey, 'hex');
   const signature = toHexString(key.sign(dataToSign).toDER());
   return signature;
@@ -79,5 +67,7 @@ export function toHexString(byteArray) {
 export function getPublicKey(aPrivateKey) {
   return ec.keyFromPrivate(aPrivateKey, 'hex').getPublic().encode('hex');
 }
+
+
 
 
