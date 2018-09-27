@@ -1,26 +1,28 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Form, Input, Label } from 'semantic-ui-react'
-import { setRecipient, setAmount } from '../store'
+import { postTransaction, getBalance } from '../store'
 
 class SendTransaction extends Component {
   constructor() {
     super();
     this.state = {
       recipient: '',
-      amount: 0,
+      amount: '',
     }
   }
 
   async handleSubmit(evt) {
     evt.preventDefault();
     const { recipient, amount } = this.state;
-
+    const { serverNetwork } = this.props;
+    this.props.postTransaction(serverNetwork, recipient, Number(amount));
+    this.setState({ recipient: '', amount: 0 });
   }
 
   handleChange(evt) {
     const { name, value } = evt.target;
-    this.setState({ this.state[name]: value });
+    this.setState({ [name]: value });
   }
 
   render() {
@@ -32,7 +34,7 @@ class SendTransaction extends Component {
             <Label>Recipient</Label>
             <Input
               type="text"
-              placeholder="0x66ca3d129692689c23eeafd566a08f58128ede34"
+              placeholder="0x66ca3d...e34"
               name="recipient"
               onChange={this.handleChange.bind(this)}
               value={recipient}
@@ -47,7 +49,7 @@ class SendTransaction extends Component {
             />
 
           <button className="ui primary button connect-button">
-            Connect to a server
+            Send Transaction
           </button>
         </Form>
       </div>
@@ -58,11 +60,12 @@ class SendTransaction extends Component {
 const mapStateToProps = state => ({
   recipient: state.transactions.recipient,
   amount: state.transactions.amount,
+  serverNetwork: state.networks.serverNetwork,
 })
 
 const mapDispatchToProps = dispatch => ({
-  setAmount: amount => dispatch(setAmount(amount)),
-  setRecipient: recipient => dispatch(setRecipient(recipient))
+  postTransaction: (network, recipient, amount) => dispatch(postTransaction(network, recipient, amount)),
+  getBalance: () => dispatch(getBalance())
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(ConnectForm)
+export default connect(mapStateToProps, mapDispatchToProps)(SendTransaction)

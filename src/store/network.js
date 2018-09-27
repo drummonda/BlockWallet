@@ -11,7 +11,7 @@ export const SET_SERVER_NETWORK = 'SET_SERVER_NETWORK';
  */
 const defaultNetworks = {
   socketNetwork: '',
-  serverNetork: '',
+  serverNetwork: '',
 };
 
 /**
@@ -37,7 +37,7 @@ export default function(state = defaultNetworks, action) {
       return {...state, socketNetwork: action.socket};
 
     case SET_SERVER_NETWORK:
-      return {...state, serverNetork: action.server};
+      return {...state, serverNetwork: action.server};
 
     default:
       return state;

@@ -3,6 +3,7 @@ import { initWallet } from './wallet/index'
 import logo from './cube-vector.png'
 import ConnectSocketForm from './components/ConnectSocketForm'
 import ConnectServerForm from './components/ConnectServerForm'
+import SendTransaction from './components/SendTransaction'
 import BlockView from './components/BlockView'
 import './App.css';
 
@@ -26,7 +27,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    initWallet(privateKeyLocation);
+    initWallet();
   }
 
   render() {
@@ -49,6 +50,7 @@ class App extends Component {
             />}
         </div>
         <BlockView />
+        <SendTransaction />
       </div>
     );
   }

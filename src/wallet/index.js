@@ -26,12 +26,12 @@ export function generatePrivateKey() {
   return privateKey.toString(16);
 }
 
-export function initWallet(location) {
-  if(existsSync(location)) {
+export function initWallet() {
+  if(existsSync(privateKeyLocation)) {
     return;
   }
   const newPrivateKey = generatePrivateKey();
-  writeFileSync(location, newPrivateKey);
+  writeFileSync(privateKeyLocation, newPrivateKey);
   console.log('new wallet with private key created');
 }
 

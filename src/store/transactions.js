@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { getPrivateFromWallet, getPublicFromWallet, signTxIn } from '../wallet'
+import { getPrivateFromWallet, getPublicFromWallet } from '../wallet'
+import { signTxIn } from '../wallet/transaction'
 
 /**
  * ACTION TYPES
@@ -14,7 +15,7 @@ export const GET_BALANCE = 'GET_BALANCE';
  * INITIAL STATE
  */
 const defaultState = {
-  transactions: [];
+  transactions: [],
   balance: 0,
 };
 
@@ -36,25 +37,26 @@ export const setBalance = balance => ({
 /**
  * THUNK CREATORS
  */
-export const postTransaction = dispatch => async (network, recipient, transaction) => {
+export const postTransaction = (network, recipient, amount) => async dispatch => {
   const privateKey = getPrivateFromWallet();
   const publicKey = getPublicFromWallet();
   const transactionDetails = {
     receiverAddress: recipient,
     senderAddress: publicKey,
-    amount: transaction
+    amount
   }
+  console.log('transaction details', transactionDetails);
   const resp = await axios.post(`${network}/api/blockchain/proposeTransaction`, transactionDetails);
   const tx = resp.data;
   tx.txIns = tx.txIns.map((txIn, index) => {
     txIn.signature = signTxIn(tx, index, privateKey);
     return txIn;
   });
-  const txToAdd = await axios.post(`${network}/api/blockchain/signedTransaction`, { tx });
+  const txToAdd = await axios.post(`${network}api/blockchain/signedTransaction`, { tx });
   dispatch(addTransaction(txToAdd));
 }
 
-export const getBalance = dispatch => async network => {
+export const getBalance = network => async dispatch => {
   const publicKey = getPublicFromWallet();
   const { data } = await axios.get(`${network}/api/blockchain`, {
     headers: { address: publicKey }
