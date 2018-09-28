@@ -45,15 +45,14 @@ export const postTransaction = (network, recipient, amount) => async dispatch =>
     senderAddress: publicKey,
     amount
   }
-  console.log('transaction details', transactionDetails);
   const resp = await axios.post(`${network}/api/blockchain/proposeTransaction`, transactionDetails);
   const tx = resp.data;
   tx.txIns = tx.txIns.map((txIn, index) => {
     txIn.signature = signTxIn(tx, index, privateKey);
     return txIn;
   });
-  const txToAdd = await axios.post(`${network}api/blockchain/signedTransaction`, { tx });
-  dispatch(addTransaction(txToAdd));
+  await axios.post(`${network}/api/blockchain/signedTransaction`, { tx });
+  dispatch(addTransaction(tx));
 }
 
 export const fetchBalance = network => async dispatch => {
