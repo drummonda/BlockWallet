@@ -5,6 +5,7 @@ import ConnectSocketForm from './components/ConnectSocketForm'
 import ConnectServerForm from './components/ConnectServerForm'
 import SendTransaction from './components/SendTransaction'
 import BlockView from './components/BlockView'
+import ViewBalance from './components/ViewBalance'
 import './App.css';
 
 class App extends Component {
@@ -51,6 +52,7 @@ class App extends Component {
         </div>
         <BlockView />
         <SendTransaction />
+        <ViewBalance />
       </div>
     );
   }

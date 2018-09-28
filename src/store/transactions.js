@@ -56,9 +56,10 @@ export const postTransaction = (network, recipient, amount) => async dispatch =>
   dispatch(addTransaction(txToAdd));
 }
 
-export const getBalance = network => async dispatch => {
+export const fetchBalance = network => async dispatch => {
   const publicKey = getPublicFromWallet();
-  const { data } = await axios.get(`${network}/api/blockchain`, {
+  console.log('my public key', publicKey);
+  const { data } = await axios.get(`${network}/api/blockchain/balance`, {
     headers: { address: publicKey }
   });
   dispatch(setBalance(data));

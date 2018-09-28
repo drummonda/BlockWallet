@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Form, Input, Label } from 'semantic-ui-react'
-import { postTransaction, getBalance } from '../store'
+import { postTransaction } from '../store'
 
 class SendTransaction extends Component {
   constructor() {
@@ -65,7 +65,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   postTransaction: (network, recipient, amount) => dispatch(postTransaction(network, recipient, amount)),
-  getBalance: () => dispatch(getBalance())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SendTransaction)

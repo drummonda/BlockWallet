@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { setServer } from '../store'
+import { setServer, fetchBalance } from '../store'
 import './ConnectForm.css'
 
 class ConnectForm extends Component {
@@ -20,6 +20,7 @@ class ConnectForm extends Component {
     const server = `http://${network}`;
     this.setState({ network: '' });
     this.props.setServer(server);
+    this.props.fetchBalance(server);
     this.props.hide();
   }
 
@@ -60,6 +61,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   setServer: server => dispatch(setServer(server)),
+  fetchBalance: server => dispatch(fetchBalance(server))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ConnectForm)
