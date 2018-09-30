@@ -11,7 +11,7 @@ class Chain extends Component {
 
     return (
       <div id='blockchain'>
-        <h3>Block Explorer: </h3>
+        <h3 id='block-explorer'>Block Explorer: </h3>
         {blockchain.length ?
           <Card.Group>
             {blockchain.map(block => (

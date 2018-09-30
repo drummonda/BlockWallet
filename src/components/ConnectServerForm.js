@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Button } from 'semantic-ui-react'
 import { setServer, fetchBalance } from '../store'
 import './ConnectForm.css'
 
@@ -46,9 +47,9 @@ class ConnectForm extends Component {
             />
           </div>
 
-          <button className="ui primary button connect-button">
+          <Button inverted color='blue'>
             Connect to a server
-          </button>
+          </Button>
         </form>
       </div>
     )

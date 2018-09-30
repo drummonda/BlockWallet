@@ -40,6 +40,9 @@ class App extends Component {
           <h1 className="App-title">Welcome to blockwallet!</h1>
         </header>
         <div>
+          {!serverFormVisible && !socketFormVisible &&
+            <ViewBalance />}
+
           {socketFormVisible &&
             <ConnectSocketForm
               hide={this.hideSocketForm}
@@ -52,7 +55,6 @@ class App extends Component {
         </div>
         <BlockView />
         <SendTransaction />
-        <ViewBalance />
       </div>
     );
   }

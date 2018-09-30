@@ -16,11 +16,18 @@ class ViewBalance extends Component {
 
     return (
       <div id='balance'>
-        <Statistic horizontal>
-          <Statistic.Value>{balance}</Statistic.Value>
-          <Statistic.Label>My balance</Statistic.Label>
-        </Statistic>
-        <Button onClick={this.handleRefresh.bind(this)}>Refresh</Button>
+        <div id='container'>
+          <Statistic inverted horizontal>
+            <Statistic.Value>{balance}</Statistic.Value>
+            <Statistic.Label>My balance</Statistic.Label>
+          </Statistic>
+          <Button
+            className='refresh'
+            onClick={this.handleRefresh.bind(this)}
+          >
+            Refresh
+          </Button>
+        </div>
       </div>
     )
   }

@@ -1,3 +1,8 @@
 #blockchain {
   margin: 5%;
+  color: white;
+}
+
+#block-explorer {
+  font-color: white;
 }

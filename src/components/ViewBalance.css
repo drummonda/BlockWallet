@@ -1,6 +1,18 @@
 #balance {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+#container {
   width: 20%;
-  flex-flow: column wrap;
+  justify-content: space-between;
+}
+
+.button {
+  margin: 2%;
 }
 
 .connect-form {

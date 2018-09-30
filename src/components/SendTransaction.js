@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Form, Input, Label } from 'semantic-ui-react'
+import { Form, Input, Label, Button } from 'semantic-ui-react'
 import { postTransaction } from '../store'
 
 class SendTransaction extends Component {
@@ -31,7 +31,6 @@ class SendTransaction extends Component {
     return (
       <div className="connect-form">
         <Form onSubmit={this.handleSubmit.bind(this)}>
-            <Label>Recipient</Label>
             <Input
               type="text"
               placeholder="0x66ca3d...e34"
@@ -39,7 +38,6 @@ class SendTransaction extends Component {
               onChange={this.handleChange.bind(this)}
               value={recipient}
             />
-            <Label>Amount</Label>
             <Input
               type="text"
               placeholder="5.40"
@@ -48,9 +46,9 @@ class SendTransaction extends Component {
               value={amount}
             />
 
-          <button className="ui primary button connect-button">
+          <Button inverted color='green'>
             Send Transaction
-          </button>
+          </Button>
         </Form>
       </div>
     )

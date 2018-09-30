@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-// import { default as initSocket } from '../socket';
+import { Button } from 'semantic-ui-react'
 import { setBlockchain, setServer, setSocket } from '../store'
 import './ConnectForm.css'
 
@@ -59,9 +59,9 @@ class ConnectForm extends Component {
             />
           </div>
 
-          <button className="ui primary button connect-button">
+          <Button inverted color='blue' content='Blue'>
             Connect to a network
-          </button>
+          </Button>
         </form>
       </div>
     )
