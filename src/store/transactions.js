@@ -71,7 +71,7 @@ export default function(state = defaultState, action) {
   switch (action.type) {
 
     case ADD_CONFIRMED_TRANSACTION:
-      return {...state, transactions: [...state.transations, action.transaction]};
+      return {...state, transactions: [...state.transactions, action.transaction]};
 
     case GET_BALANCE:
       return {...state, balance: action.balance};
